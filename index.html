@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Rental Website</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-center">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#explore">Explore Cars</a></li>
+                    <li><a href="#about-us">About Us</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#blog">Blog</a></li>
+                </ul>
+            </div>
+            <div class="logo">
+                <video src="logo/baraka travels.mp4" autoplay muted loop playsinline></video>
+            </div>
+            <div class="auth-buttons">
+                <button id="login-btn">Login</button>
+                <button id="signup-btn">Sign Up</button>
+                <button id="cart-btn">Cart (<span id="cart-count">0</span>)</button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="home-section">
+            <div class="home-content">
+                <h1>Welcome to Baraka Travels</h1>
+                <p>Find the perfect car for your next adventure!</p>
+            </div>
+            <div class="home-image">
+                <img src="logo/file.png" alt="Car Image">
+            </div>
+        </section>
+
+        <section id="explore">
+            <h2>Explore Cars</h2>
+            <div class="car-container">
+                <!-- Car cards will be dynamically added here -->
+                <!-- Example car card -->
+                <div class="car-card" data-id="1" data-name="Car Name" data-description="Car Description" data-price="100" data-image="car-image.jpg">
+                    <img src="car-image.jpg" alt="Car Name">
+                    <div class="details">
+                        <h3>Car Name</h3>
+                        <p>Car Description</p>
+                        <p>Price: $100</p>
+                    </div>
+                    <div class="buttons">
+                        <button class="like-btn" onclick="addToCart(this)">Add to Cart</button>
+                    </div>
+                </div>
+                <!-- More car cards go here -->
+            </div>
+        </section>
+
+        <section id="about-us">
+            <h2>About Us</h2>
+            <div class="about-image">
+                <img src="landingpage/front-left-side-47.webp" alt="Car Image">
+            </div>
+            <div class="about-content">
+                <p>
+                    Welcome to our car rental service. We offer a wide range of vehicles to suit all your needs. Whether you're looking for a compact car for city driving, a luxury vehicle for a special occasion, or a rugged SUV for an adventure, we have you covered. Our fleet includes the latest models from top brands, ensuring you get the best in comfort, safety, and performance.
+                </p>
+            </div>
+        </section>
+
+        <section id="testimonials">
+            <h2 class="testimonials-title">What Our Customers Say</h2>
+            <div class="testimonial-container">
+                <article class="testimonial">
+                    <img src="Testimonials/beautiful-african-girl-black-hair-ai-generated_874192-3291.avif" alt="Customer Photo" class="testimonial-photo">
+                    <p>"Great experience! The car was in excellent condition and the rental process was smooth. Highly recommend!"</p>
+                    <footer>
+                        <cite>- Jane Doe</cite>
+                        <div class="rating">
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                        </div>
+                    </footer>
+                </article>
+                <article class="testimonial">
+                    <img src="Testimonials/056d3fae5a313c11b4548781ebf677ed.jpg" alt="Customer Photo" class="testimonial-photo">
+                    <p>"Fantastic service and friendly staff. The booking was straightforward and the vehicle was perfect for my trip."</p>
+                    <footer>
+                        <cite>- John Smith</cite>
+                        <div class="rating">
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                        </div>
+                    </footer>
+                </article>
+            </div>
+        </section>
+
+        <section id="blog">
+            <h2>Welcome to Our Blog</h2>
+            <div class="blog-posts">
+                <article class="blog-post">
+                    <img src="Testimonials/Alfa Romeo Tonale web.webp" alt="Car Rental Tips">
+                    <div class="blog-content">
+                        <h3><a href="#">Essential Tips for Your Next Car Rental</a></h3>
+                        <p class="date">July 20, 2024</p>
+                        <p class="excerpt">Planning your next adventure? Here are some essential tips to ensure you get the best value and experience from your car rental...</p>
+                        <a href="#" class="read-more">Read More</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <!-- Car Details Modal -->
+    <div id="car-details-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="car-title">Car Title</h2>
+            <div id="car-details">
+                <!-- Car details will be injected here -->
+            </div>
+            <button id="rent-btn">Proceed to Rent</button>
+        </div>
+    </div>
+
+    <!-- Rental Details Modal -->
+    <div id="rental-details-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="rental-car-title">Car Title</h2>
+            <div id="rental-details">
+                <!-- Rental details will be injected here -->
+                <div>
+                    <label for="pickup-location">Pickup Location:</label>
+                    <input type="text" id="pickup-location">
+                </div>
+                <div>
+                    <label for="pickup-date">Pickup Date:</label>
+                    <input type="date" id="pickup-date">
+                </div>
+                <div>
+                    <label for="pickup-time">Pickup Time:</label>
+                    <input type="time" id="pickup-time">
+                </div>
+                <div>
+                    <label for="dropoff-location">Dropoff Location:</label>
+                    <input type="text" id="dropoff-location">
+                </div>
+                <div>
+                    <label for="dropoff-date">Dropoff Date:</label>
+                    <input type="date" id="dropoff-date">
+                </div>
+                <div>
+                    <label for="dropoff-time">Dropoff Time:</label>
+                    <input type="time" id="dropoff-time">
+                </div>
+            </div>
+            <div id="payment-selection">
+                <label for="payment-method">Select Payment Method:</label>
+                <select id="payment-method" required>
+                    <option value="">Choose...</option>
+                    <option value="mpesa">M-Pesa</option>
+                    <option value="paypal">PayPal</option>
+                    <option value="equity">Equity Bank</option>
+                </select>
+            </div>
+            <div id="mpesa-form" class="payment-form">
+                <form id="mpesa-payment-form">
+                    <label for="mpesa-phone">Phone Number:</label>
+                    <input type="text" id="mpesa-phone" required>
+                    <input type="hidden" id="mpesa-amount" value="70"> <!-- Dynamic amount based on selected car -->
+                    <button type="submit">Pay with M-Pesa</button>
+                </form>
+            </div>
+            <div id="paypal-form" class="payment-form">
+                <p>PayPal payment is currently not implemented.</p>
+            </div>
+            <div id="equity-form" class="payment-form">
+                <p>Equity Bank payment is currently not implemented.</p>
+            </div>
+            <div id="payment-status"></div>
+            <button id="confirm-rent-btn">Confirm Rent</button>
+        </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div id="cart-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Cart</h2>
+            <div id="cart-items"></div>
+            <button id="checkout-btn">Checkout</button>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Login</h2>
+            <form id="login-form">
+                <label for="login-email">Email:</label>
+                <input type="email" id="login-email" required>
+                <label for="login-password">Password:</label>
+                <input type="password" id="login-password" required>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Sign Up Modal -->
+    <div id="signup-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Sign Up</h2>
+            <form id="signup-form">
+                <label for="signup-email">Email:</label>
+                <input type="email" id="signup-email" required>
+                <label for="signup-password">Password:</label>
+                <input type="password" id="signup-password" required>
+                <button type="submit">Sign Up</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="contact-info">
+                <h2>Contact Us</h2>
+                <p>Phone: <a href="tel:+1234567890">+254 797 107 226</a></p>
+                <p>Email: <a href="mailto:info@yourcompany.com">baraka.travels@gmail.com</a></p>
+            </div>
+            <div class="social-media">
+                <a href="https://www.instagram.com/yourcompany" target="_blank" class="social-icon instagram">
+                    <img src="https://img.icons8.com/material-outlined/24/000000/instagram-new.png" alt="Instagram">
+                </a>
+                <a href="https://www.linkedin.com/company/yourcompany" target="_blank" class="social-icon linkedin">
+                    <img src="https://img.icons8.com/material-outlined/24/000000/linkedin.png" alt="LinkedIn">
+                </a>
+                <a href="https://www.tiktok.com/@yourcompany" target="_blank" class="social-icon tiktok">
+                    <img src="https://img.icons8.com/material-outlined/24/000000/tiktok.png" alt="TikTok">
+                </a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 BARAKA TRAVELS. All rights reserved.</p>
+        </div>
+    </footer>
+
+
+    <script src="scripts.js"></script>
+</body>
+</html>
